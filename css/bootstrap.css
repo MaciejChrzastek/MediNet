@@ -30,6 +30,8 @@
     --gray: #999;
     --gray-dark: #333;
     --primary: #158cba;
+    --primary-light: #31718ed5;
+    --primary-dark: #126f94 ;
     --secondary: #f0f0f0;
     --success: #28b62c;
     --info: #75caeb;
@@ -51,6 +53,29 @@
 *::after {
     box-sizing: border-box;
 }
+
+.menu-item {
+    border-right: 1px solid var(--primary-dark);
+    height: 2.2em;
+    align-self: center;
+    text-align: center;
+    vertical-align: middle;
+    width: 20%;
+ }
+
+ .menu-item-last {
+    height: 2.2em;
+    align-self: center;
+    text-align: center;
+    vertical-align: middle;
+    width: 20%;
+ }
+
+ .nav-item:hover{
+     font-weight: bold;
+     width: 20%;
+    }
+
 
 html {
     font-family: sans-serif;
@@ -5555,11 +5580,18 @@ a.badge-dark.focus {
 }
 
 .jumbotron {
-    padding: 2rem 1rem;
+   /* padding: 2rem 1rem;*/
     margin-bottom: 2rem;
-    background-color: #fafafa;
-    border-radius: 0.3rem;
+    background-color: rgba(360,360,360,0.5); /* z  background-color: #fafafa; */
 }
+
+.jumbotron-extra {
+     padding: 1em;  
+     border-color: var(--primary);
+     border-style: solid;
+     border-width: 4px;
+     border-radius: 0.6rem;
+ }
 
 @media (min-width: 576px) {
     .jumbotron {
