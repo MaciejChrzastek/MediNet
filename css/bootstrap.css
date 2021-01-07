@@ -76,6 +76,9 @@
      width: 20%;
     }
 
+.label-form {
+        vertical-align: top;
+    }
 
 html {
     font-family: sans-serif;
@@ -5587,10 +5590,12 @@ a.badge-dark.focus {
 
 .jumbotron-extra {
      padding: 1em;  
+     background-color: rgba(360,360,360,0.5);
      border-color: var(--primary);
      border-style: solid;
-     border-width: 4px;
+     border-width: 1px;
      border-radius: 0.6rem;
+     margin-bottom: 10px;
  }
 
 @media (min-width: 576px) {
@@ -8461,6 +8466,10 @@ button.bg-dark:focus {
 
 .w-75 {
     width: 75% !important;
+}
+
+.w-85 {
+    width: 85% !important;
 }
 
 .w-100 {
