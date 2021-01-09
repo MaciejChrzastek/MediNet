@@ -14,6 +14,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
     <title>MediNet</title>
 </head>
 
@@ -65,18 +69,21 @@
                 <hr class="my-3">
             </p>
 
-            <div style=" display: flex; justify-content: center; margin-top: 30px;">
-                <div class="jumbotron w-100 align-middle" style="width:1100px; height: 470px; background-color: rgba(360,360,360,0.5); ">
-
-                    <h1>Ni mom pojęcia jak zrobić wybieranie terminu</h1>
+            <div style=" display: flex; justify-content: center; margin-top: 30px; align-items: center; align-content: center;">
+                <div class="jumbotron w-100 align-middle" style="width:1100px; height: 250px; background-color: rgba(360,360,360,0.5); ">
 
 
+                    <input id="datepicker" width="1140" style="text-align: center; font-size: 30px; " />
+                    <script>
+                        $('#datepicker').datepicker({
+                            uiLibrary: 'bootstrap4'
+                        });
+                    </script>
 
 
-                    <p id="chosenDate" class="w-100 " style="text-align: center; font-size: 20px; ">10.10.2021</p>
 
-                    <p id="options1" class="w-100 " style="text-align: center; padding-top: 5px; ">
-                        <a id="registrarChooseDateButton" style="font-weight: bolder; font-size: 20px; " href="# ">Wybierz</a>
+                    <p id="options1" class="w-100 " style="text-align: center; padding-top: 40px; ">
+                        <a id="registrarChooseDateButton" style="font-weight: bolder; font-size: 30px; " href="# ">Wybierz</a>
                     </p>
 
                 </div>
