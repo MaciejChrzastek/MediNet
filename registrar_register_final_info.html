@@ -60,23 +60,24 @@
         <div class="w-75" style="flex-direction: column;">
 
             <p style="font-size:larger; margin-left: 20px;">
-                <b style="color: var(--primary);">Rachunek Pacjenta</b>
+                <b style="color: var(--primary);">Rejestracja Pacjenta</b>
                 <hr class="my-3">
             </p>
 
-            <div id="no_bill" class=" w-100 align-middle " style="display:none; height: 200px; margin-top: 20px; justify-content: center; align-items: center; padding: 50px; text-align: center;">
-                <h5 style="color: var(--primary);">Rachunek nie jest obciążony żadną należnością</h5>
+            <div id="error" class=" w-100 align-middle " style="display:none; height: 200px; margin-top: 20px; justify-content: center; align-items: center; padding: 50px; text-align: center;">
+                <h5 style="color: var(--primary);">Wystąpił nieoczekiwany błąd - spróbuj ponownie później</h5>
+                <p id="options_error" class="w-100 " style="text-align: center; padding-top: 20px; ">
+                    <a id="registrarCancelAcceptPaymentButton" style="font-weight: bolder; font-size: 40px; " href="registrar_patient_details.html">Rozumiem</a>
+                </p>
             </div>
 
-            <div style=" display: flex; justify-content: center; margin-top: 20px;">
+            <div id="no_error" style=" display: flex; justify-content: center; margin-top: 20px;">
                 <div class="jumbotron w-100 align-middle" style="width:1100px; height: 450px; background-color: rgba(360,360,360,0.5); ">
 
-                    <p class="w-100 " style="text-align: center; font-size: 40px; ">Całkowita kwota do zapłaty [pln]</p>
-                    <p id="patientBill" class="w-100 " style="text-align: center; font-size: 40px; ">250,00</p>
+                    <p class="w-100 " style="text-align: center; font-size: 40px; ">Rejestracja wykonana pomyślnie</p>
 
-
-                    <p id="options" class="w-100 " style="text-align: center; padding-top: 20px; ">
-                        <a id="registrarAcceptPayment" style="font-weight: bolder; font-size: 40px; " href="registrar_confirm_payment_acceptation.html">Uznaj Płatność</a>
+                    <p id="options_no_error" class="w-100 " style="text-align: center; padding-top: 20px; ">
+                        <a id="registrarContinueButton" style="font-weight: bolder; font-size: 40px; " href="registrar_patient_details.html">Dalej</a>
                     </p>
                 </div>
             </div>
