@@ -12,7 +12,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <!--javaScript Bootstrapa-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    
+    <script src="patient_complaint_form.js"></script>
+
     <title>Reklamacja</title>
 </head>
 
@@ -22,7 +23,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-light w-100" >
         <ul class="navbar-nav ml-auto w-100 align-left">
-            <li><img src="css/logo.png" style="height:60px; float: left; "></li>
+            <li><a href="patient_main.html"><image src="css/logo.png" style="height:60px; float: left; "></a></li>
         </ul>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto align-right">
@@ -100,7 +101,7 @@
             <div class="w-50" style="display: flex; flex-direction: row; margin-top: 10px; align-items: center; justify-content: space-between; ">
 
             <a type="button" style="width:150px; text-transform: capitalize;" class="btn btn-primary"  href="patient_visits.html" role="button">Anuluj</a>
-            <a type="button" style="width:150px; text-transform: capitalize;" class="btn btn-primary" href="patient_visits.html" role="button">Reklamuj</a>
+            <a type="button" onclick="submitComplaint()" style="width:150px; text-transform: capitalize;" class="btn btn-primary" href="patient_visits.html" role="button">Reklamuj</a>
 
             </div>
 
