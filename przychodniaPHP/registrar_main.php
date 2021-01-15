@@ -56,7 +56,7 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto nav-fill w-100">
                 <li class="nav-item active menu-item">
-                    <a class="nav-link" href="registrar_patient_list.html">
+                    <a class="nav-link" href="registrar_patient_list.php">
                         Lista Pacjentów
                         <span class="sr-only">(current)</span>
                     </a>
