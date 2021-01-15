@@ -1,12 +1,19 @@
 ﻿<?php
-	session_start();
+    session_start();
+
 	if((isset($_SESSION['zalogowano'])) && ($_SESSION['zalogowano']==true))
 	{
 		if($_SESSION['type'] == 'rejestrator')
 		{
 			header('Location: registrar_main.php');
 			exit();
-		}
+        }
+        else if($_SESSION['type'] == 'pacjent')
+		{
+			header('Location: patient_main.php');
+			exit();
+        }
+        
 	}
 	
 ?>
