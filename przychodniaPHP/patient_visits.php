@@ -113,7 +113,7 @@
                 <a id="cancel" onclick="cancelVisit(this)" style="font-weight: bolder;" href="#">Odwołaj</a>
                 <a id="complain" onclick="submitComplaint()" style="font-weight: bolder; margin-left: 30px;" href="patient_complaint_form.php">Zareklamuj</a>
                 </p>
-            </div>
+            </div>-->
             <div class="w-100 align-middle jumbotron-extra list_element" style="padding-left: 25px; padding-right: 25px;height: 50px; display: flex; justify-content: space-between; flex-direction: row;">
                 <p id="ic_and_date w-25">
                 <img id="icon" style="width: 20px; height:25px;" src="css/tick.png">
@@ -121,10 +121,10 @@
                 </p>
                 <p id="doctor" class="w-50" style="text-align: center;">dr Alicja Królik</p>
                 <p id="options"  class="w-25 fa-align-right" style="text-align: right;">
-                <a id="cancel" onclick="cancelVisit(this)" style="font-weight: bolder;" href="#">Odwołaj</a>
+                <a id="cancel" onclick="javascript:cancelVisit1()" style="font-weight: bolder;" href="#">Odwołaj</a>
                 <a id="complain" onclick="submitComplaint()" style="font-weight: bolder; margin-left: 30px;" href="patient_complaint_form.php">Zareklamuj</a>
                 </p>
-            </div> -->
+            </div> 
             <?php
 	            $polaczenie = mysqli_connect("localhost","root","","przychodniaDB");
                 $sql = "SELECT 
@@ -142,6 +142,7 @@
                         ORDER BY w.`TerminWizyty` DESC
                             ";
                 $result = $polaczenie-> query($sql);
+                $number=0;
 
                 if($result -> num_rows > 0){
                     while ($row = $result-> fetch_assoc()){
@@ -159,17 +160,21 @@
                             $height = "20px";
                         }
 
-                        echo "<div class=\"w-100 align-middle jumbotron-extra list_element\" style=\"padding-left: 25px; padding-right: 25px;height: 50px; display: flex; justify-content: space-between; flex-direction: row;\">
+                        $termin = $row["TerminWizyty"]."";
+                        echo "<div id=\"div--".$number."\" class=\"w-100 align-middle jumbotron-extra list_element\" style=\"padding-left: 25px; padding-right: 25px;height: 50px; display: flex; justify-content: space-between; flex-direction: row;\">
                         <p id=\"ic_and_date w-25\">
                         <img id=\"icon\" style=\"width: 20px; height:".$height.";\" src=\"". $icon ."\">
-                        <p id=\"date_time1\" class=\"date_time\"><b>". $row["TerminWizyty"] ."</b></p>
+                        <p id=\"date_time1-".$number."\" class=\"date_time\"><b>". $row["TerminWizyty"] ."</b></p>
                         </p>
-                        <p id=\"doctor\" class=\"w-50\" style=\"text-align: center;\">". $row["Lekarz"] ."</p>
-                        <p id=\"options\"  class=\"w-25 fa-align-right\" style=\"text-align: right;\">
-                        <a id=\"cancel\" onclick=\"cancelVisit(this)\" style=\"font-weight: bolder;\" href=\"#\">Odwołaj</a>
-                        <a id=\"complain\" onclick=\"submitComplaint()\" style=\"font-weight: bolder; margin-left: 30px;\" href=\"patient_complaint_form.php\">Zareklamuj</a>
+                        <p id=\"doctor-".$number."\" class=\"w-50\" style=\"text-align: center;\">". $row["Lekarz"] ."</p>
+                        <p id=\"options-".$number."\"  class=\"w-25 fa-align-right\" style=\"text-align: right;\">
+                        <a id=\"cancel-".$number."\" onclick=\"cancelVisit(this.id)\" style=\"font-weight: bolder;\" href=\"#\">Odwołaj</a>
+                        <a id=\"complain-".$number."\" onclick=\"submitComplaint()\" style=\"font-weight: bolder; margin-left: 30px;\" href=\"patient_complaint_form.php\">Zareklamuj</a>
+
                         </p>
                         </div>";
+
+                        $number = $number + 1; 
                     }
                 }
 

@@ -51,6 +51,10 @@ function cancelVisit(context){
   
 }
 
+function cancelVisit1(){
+       window.alert("a");
+}
+
 function submitComplaint(){
 
 }
