@@ -31,7 +31,7 @@
 
 <body>
 
-    <div id="snackbar" class = "snackbar">Wizyta została odwołana</div>
+    <div id="snackbar" class = "snackbar">Reklamacja została złożona</div>
   
     <!-- pierwszy NavBar - ikony + dropdown -->
 
@@ -115,7 +115,7 @@
             <div class="w-50" style="display: flex; flex-direction: row; margin-top: 10px; align-items: center; justify-content: space-between; ">
 
             <a type="button" style="width:150px; text-transform: capitalize;" class="btn btn-primary"  href="patient_visits.php" role="button">Anuluj</a>
-            <a type="button" onclick="submitComplaint()" style="width:150px; text-transform: capitalize;" class="btn btn-primary" href="#" role="button">Reklamuj</a>
+            <a type="button" onclick="submitComplaint()" style="width:150px; text-transform: capitalize;" class="btn btn-primary" href="patient_visits.php" role="button">Reklamuj</a>
 
             </div>
 
