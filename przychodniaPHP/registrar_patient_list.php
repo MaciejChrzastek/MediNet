@@ -76,11 +76,6 @@
 
             <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
 
-                <script>
-                    function redirect(patId) {
-                    location.replace("https://www.w3schools.com")
-                    }
-                </script>
                 <?php
                     
                     require_once "connect.php";	
@@ -102,39 +97,21 @@
                             $ile_wynikow = $rezultat->num_rows;
                             if($ile_wynikow>0)
                             {
+
                                 $to_show = "<div class=\"list-group\" style=\"max-height: 400px; width: 800px;margin-bottom: 10px; overflow-y:auto\">";
                                 while($wiersz = $rezultat->fetch_assoc()){
-                                    $patient_data = $wiersz['Imię']." ".$wiersz['Nazwisko']." ".$wiersz['Email']." ".$wiersz['Telefon'];
-                                    $pat_id = $wiersz['ID'];
-                                    $to_show.="<form id=\"";
+                                    $patient_data = $wiersz['Imię']." ".$wiersz['Nazwisko']."\t\t".$wiersz['Email']."\t\t".$wiersz['Telefon'];
+                                    $to_show.="<a id=\"";
                                     $to_show.=$wiersz['ID'];
-                                    $to_show.="\" onclick=\" redirect(";
-                                    $to_show.=$pat_id;
-                                    $to_show.=") \" class=\"list-group-item list-group-item-action \">";
+                                    $to_show.="\" href=\" registrar_patient_details.php?index=";
+                                    $to_show.=$wiersz['ID'];
+                                    $to_show.=" \" class=\"list-group-item list-group-item-action \">";
                                     $to_show.=$patient_data;
-                                    $to_show.="</form>";       
+                                    $to_show.="</a>";       
                                 }  
                                 $to_show.="</div>";               
 
-                                echo $to_show; 
-
-                                /*
-                                $to_show = "<div class=\"list-group\" style=\"max-height: 400px; width: 800px;margin-bottom: 10px; overflow-y:auto\">";
-                                while($wiersz = $rezultat->fetch_assoc()){
-                                    $patient_data = $wiersz['Imię']." ".$wiersz['Nazwisko']." ".$wiersz['Email']." ".$wiersz['Telefon'];
-                                    $pat_id = $wiersz['ID'];
-                                    $to_show.="<button id=\"";
-                                    $to_show.=$wiersz['ID'];
-                                    $to_show.="\" onclick=\" redirect(";
-                                    $to_show.=$pat_id;
-                                    $to_show.=") \" class=\"list-group-item list-group-item-action \">";
-                                    $to_show.=$patient_data;
-                                    $to_show.="</button>";       
-                                }  
-                                $to_show.="</div>";               
-
-                                echo $to_show; 
-                                */                              
+                                echo $to_show;                               
                                 
                             }
                             else
