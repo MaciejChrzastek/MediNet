@@ -33,11 +33,13 @@ function cancelVisit(id){
 
         date_hour = parseInt(v.substring(11,13));
         date_min = parseInt(v.substring(14,16));
+
+        var icon_id = "icon-"+id_num;
  
         var date1 = new Date(date_year,date_month,date_day,date_hour,date_min,0,0);
     //   window.alert("date-date: "+v+"\ndate1: "+date1+"\ndate2: "+date);
       // var txt = document.getElementById('date_time').innerHTML.substring(3,18);
-     //  window.alert("a"+txt.toString());
+    //   window.alert(icon_id);
 
      // window.alert(date_year+","+date_month+","+date_day+","+date_hour+","+date_minute);
 
@@ -52,13 +54,16 @@ function cancelVisit(id){
            x = document.getElementById("snackbar");
             x.className = "show";
             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+            var img = document.getElementById(icon_id);
+            img.style.height = "25px";
+            img.src = "css/cancel.png";
+            updateDB(id);
         }
         else {
         //  window.alert("Wizyta nie została odwołana");
             x = document.getElementById("snackbar_cancelled");
             x.className = "show";
             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
-            updateDB(id);
         }
     }
  
@@ -76,12 +81,30 @@ function updateDB(id){    // the #id you supplied to the button, id= 'button1'
    var spec = doctor_all[0];
    var d_name = doctor_all[1];
    var d_surname = doctor_all[2];
+  
+   var str = date_visit+"&"+spec+"&"+d_name+"&"+d_surname;
 
-      $.ajax({
-          url: 'patient_complaint_updateDB.php', // The php page with the functions
-          type: 'POST',
+   var xhttp = new XMLHttpRequest();
+   xhttp.onreadystatechange = function() {
+     if (this.readyState == 4 && this.status == 200) {
+      ;
+     }
+   };
+   xhttp.open("POST", "patient_complaint_updateDB.php?q="+str, true);
+   xhttp.send();
+/*
+   $.ajax({
+            type: "POST",
+            url: 'patient_complaint_updateDB.php',
+            dataType: 'json',
           data: {date_time:date_visit,doctor_spec:spec,doctor_name:d_name,doctor_last_name:d_surname},  // the name you're assigning, think how a $_GET works in URL,  .php?name=value...
-      }); //end ajax
+          success: function() {
+            //var html = res;// no need to waste a variable, just use it directly
+            console.log( "Yaaay" );        },
+        error: function() {
+            console.log( "Ajax Not Working" );
+        }
+        }); //end ajax*/
   }
 
 

@@ -113,7 +113,7 @@
                 <a id="cancel" onclick="cancelVisit(this)" style="font-weight: bolder;" href="#">Odwołaj</a>
                 <a id="complain" onclick="submitComplaint()" style="font-weight: bolder; margin-left: 30px;" href="patient_complaint_form.php">Zareklamuj</a>
                 </p>
-            </div>-->
+            </div>
             <div class="w-100 align-middle jumbotron-extra list_element" style="padding-left: 25px; padding-right: 25px;height: 50px; display: flex; justify-content: space-between; flex-direction: row;">
                 <p id="ic_and_date w-25">
                 <img id="icon" style="width: 20px; height:25px;" src="css/tick.png">
@@ -124,8 +124,13 @@
                 <a id="cancel" onclick="javascript:cancelVisit1()" style="font-weight: bolder;" href="#">Odwołaj</a>
                 <a id="complain" onclick="submitComplaint()" style="font-weight: bolder; margin-left: 30px;" href="patient_complaint_form.php">Zareklamuj</a>
                 </p>
-            </div> 
+            </div> -->
             <?php
+
+                include 'patient_visits_php_functions.php';
+                displayListItems(); 
+
+            /*
 	            $polaczenie = mysqli_connect("localhost","root","","przychodniaDB");
                 $sql = "SELECT 
                             LEFT(w.`TerminWizyty`,16) AS TerminWizyty, 
@@ -177,7 +182,12 @@
                         $number = $number + 1; 
                     }
                 }
-
+                else {
+                    echo '<script type="text/JavaScript">  
+                            document.getElementById("no_visits").style.display = "block"; 
+                             </script>';
+                }
+*/
             ?>
         </div>
        </div>

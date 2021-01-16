@@ -41,6 +41,10 @@
 				{
 					header('Location: patient_main.php');
 				}
+				else if($_SESSION['type'] == 'dyrektor')
+				{
+					header('Location: director_main.php');
+				}
 				
 			}
 			else
