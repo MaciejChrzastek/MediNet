@@ -1,9 +1,22 @@
 <?php
+    /*
+    header('Content-Type: application/json');
 
     $date = $_POST['date_time'];   
     $doctor_specialization = $_POST['doctor_spec']; 
     $doctor_name = $_POST['doctor_name']; 
     $doctor_last_name = $_POST['doctor_surname']; 
+    */
+    $str = $_POST['q'];
+    parse_str($str,$str_parsed);
+    $date = $str_parsed[0];   
+    $doctor_specialization = $str_parsed[1]; 
+    $doctor_name = $str_parsed[2]; 
+    $doctor_last_name = $str_parsed[3]; 
+
+    echo '<script type="text/JavaScript">  
+        window.alert("abc"); 
+     </script>';
 
     $polaczenie = mysqli_connect("localhost","root","","przychodniaDB");
 
@@ -27,6 +40,8 @@
                             AND w.`TerminWizyty` = ".$date."
                 )";
                 $result = $polaczenie-> query($sql);
-
-
+              mysqli_query($polaczenie, $sql)
+                $stmt = $polaczenie->prepare($sql);
+               // $stmt->bind_param("s", $_GET['q']);
+                $stmt->execute();
 ?>

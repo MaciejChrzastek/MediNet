@@ -13,6 +13,11 @@
 			header('Location: patient_main.php');
 			exit();
         }
+        else if($_SESSION['type'] == 'dyrektor')
+		{
+			header('Location: director_main.php');
+			exit();
+        }
         
 	}
 	
