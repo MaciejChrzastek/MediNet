@@ -5,8 +5,7 @@
 		header('Location: login.php');
 		exit();
 		
-	}
-	
+    }	
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -56,7 +55,7 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto nav-fill w-100">
                 <li class="nav-item active menu-item">
-                    <a class="nav-link" href="registrar_patient_list.php">
+                    <a class="nav-link" href="registrar_patient_details.php">
                         Powrót
                         <span class="sr-only">(current)</span>
                     </a>
@@ -70,13 +69,11 @@
         <div class="w-75" style="flex-direction: column;">
 
             <p style="font-size:larger; margin-left: 20px;">
-                <b style="color: var(--primary);">Szczegóły Pacjenta</b>
+                <b style="color: var(--primary);">Rejestracja Pacjenta</b>
                 <hr class="my-3">
             </p>
-            <div style=" display: flex; justify-content: center; margin-top: 50px;">
-                <div class="jumbotron w-100 align-middle" style="width:1100px; height: 450px; background-color: rgba(360,360,360,0.5); ">
 
-                    <?php
+            <?php
                         
                         require_once "connect.php";	
 
@@ -87,44 +84,46 @@
                         }
                         else
                         {
-                            if(isset($_GET['index'])){
-                                $_SESSION['id_wybranego_pacjenta'] = $_GET['index'];
-                            }                                
-                            $index=$_SESSION['id_wybranego_pacjenta'];
-                            if($rezultat = @$polaczenie->query("SELECT * FROM konto WHERE Typ='pacjent' AND ID='$index'"))
+                            if(isset($_GET['idw'])){
+                                $_SESSION['idw'] = $_GET['idw'];
+                            }  
+                            
+                            $idkartyp = $_SESSION['id_karty_wybranego_pacjenta'];
+                            $idwizyty = $_SESSION['idw'];
+                            
+                            if($rezultat = @$polaczenie->query("SELECT wizyta.IDKartyPacjenta from wizyta where wizyta.ID=$idwizyty and wizyta.czyOdwołana=0 and wizyta.IDKartyPacjenta is null"))
                             {
                                 $ile_wynikow = $rezultat->num_rows;
                                 if($ile_wynikow>0)
                                 {
-                                    $wiersz = $rezultat->fetch_assoc();
-                                    $_SESSION['id_karty_wybranego_pacjenta'] = $wiersz['IDKartyPacjenta'];
+                                    $aktualizacja = @$polaczenie->query("UPDATE wizyta SET wizyta.IDKartyPacjenta = '$idkartyp' WHERE wizyta.ID=$idwizyty and wizyta.czyOdwołana=0 and wizyta.IDKartyPacjenta is null");
+                                                                                   
 
-                                    $to_show = "<p id=\"patientName \" class=\"w-100 \" style=\"text-align: center; font-size: 20px; \">";
-                                    $to_show.=$wiersz['Imię'];
-                                    $to_show.="</p>";
-
-                                    $to_show.= "<p id=\"patientSurname \" class=\"w-100 \" style=\"text-align: center; font-size: 20px; \">";
-                                    $to_show.=$wiersz['Nazwisko'];
-                                    $to_show.="</p>";
-
-                                    $to_show.= "<p id=\"patientEmail \" class=\"w-100 \" style=\"text-align: center; font-size: 20px; \">";
-                                    $to_show.=$wiersz['Email'];
-                                    $to_show.="</p>";
-
-                                    $to_show.= "<p id=\"patientPhone \" class=\"w-100 \" style=\"text-align: center; font-size: 20px; \">";
-                                    $to_show.=$wiersz['Telefon'];
-                                    $to_show.="</p>";
-                                                 
-
-                                    echo $to_show;                               
+                                        echo'<div id="no_error" style=" display: flex; justify-content: center; margin-top: 20px;">
+                                        <div class="jumbotron w-100 align-middle" style="width:1100px; height: 450px; background-color: rgba(360,360,360,0.5); ">
+                        
+                                            <p class="w-100 " style="text-align: center; font-size: 40px; ">Rejestracja wykonana pomyślnie</p>
+                        
+                                            <p id="options_no_error" class="w-100 " style="text-align: center; padding-top: 20px; ">
+                                                <a id="registrarContinueButton" style="font-weight: bolder; font-size: 40px; " href="registrar_patient_details.php">Dalej</a>
+                                            </p>
+                                        </div>
+                                    </div>';
+                           
                                     
                                 }
                                 else
                                 {
-                                    echo'
-                                    <div id="no_patients" class=" w-85 align-middle " style="display:none; height: 200px; margin-top: 20px; justify-content: center; align-items: center; padding: 50px; text-align: center;">
-                                    <h5 style="color: var(--primary);">Brak danych pacjenta</h5>
-                                    </div>';
+                                    echo'<div id="error" style=" display: flex; justify-content: center; margin-top: 20px;">
+                                    <div class="jumbotron w-100 align-middle" style="width:1100px; height: 450px; background-color: rgba(360,360,360,0.5); ">
+                    
+                                        <p class="w-100 " style="text-align: center; font-size: 40px; ">Wystąpił nieoczekiwany błąd - spróbuj ponownie później</p>
+                    
+                                        <p id="options_error" class="w-100 " style="text-align: center; padding-top: 20px; ">
+                                        <a id="registrarCancelAcceptPaymentButton" style="font-weight: bolder; font-size: 40px; " href="registrar_patient_details.php">Rozumiem</a>
+                                    </p>
+                                    </div>
+                                </div>';
                                 }
                             }
                 
@@ -132,18 +131,10 @@
                         }	
                         
                     ?>
-                    <!--
-                    <p id="patientName " class="w-100 " style="text-align: center; font-size: 20px; ">Jan</p>
-                    <p id="patientSurname " class="w-100 " style="text-align: center; font-size: 20px; ">Kowalski</p>
-                    <p id="patientEmail " class="w-100 " style="text-align: center; font-size: 20px; ">jan.kowalski@gmail.com</p>
-                    <p id="patientPhone " class="w-100 " style="text-align: center; font-size: 20px; ">601106231</p>
-                    -->
-                    <p id="options" class="w-100 " style="text-align: center; padding-top: 20px; ">
-                        <a id="registrarRegister " style="font-weight: bolder; padding-right: 20px; font-size: 20px; " href="registrar_register.php">Zarejestruj</a>
-                        <a id="registrarShowBill" style="font-weight: bolder; padding-left: 20px; font-size: 20px; " href="registrar_patient_bill.php">Pokaż Rachunek</a>
-                    </p>
-                </div>
-            </div>
+
+            
+
+            
 
         </div>
     </div>
