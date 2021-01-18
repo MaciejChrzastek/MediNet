@@ -90,6 +90,7 @@
                             
                             $idkartyp = $_SESSION['id_karty_wybranego_pacjenta'];
                             $idwizyty = $_SESSION['idw'];
+                            $czasd = date("Y-m-d");
                             
                             if($rezultat = @$polaczenie->query("SELECT wizyta.IDKartyPacjenta from wizyta where wizyta.ID=$idwizyty and wizyta.czyOdwołana=0 and wizyta.IDKartyPacjenta is null"))
                             {
@@ -97,6 +98,8 @@
                                 if($ile_wynikow>0)
                                 {
                                     $aktualizacja = @$polaczenie->query("UPDATE wizyta SET wizyta.IDKartyPacjenta = '$idkartyp' WHERE wizyta.ID=$idwizyty and wizyta.czyOdwołana=0 and wizyta.IDKartyPacjenta is null");
+                                    $dodaniedanych = @$polaczenie->query("INSERT INTO rejestracja (rejestracja.CzasDokonania, rejestracja.IDWizyty) VALUES ('$czasd','$idwizyty')");
+
                                                                                    
 
                                         echo'<div id="no_error" style=" display: flex; justify-content: center; margin-top: 20px;">
