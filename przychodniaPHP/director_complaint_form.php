@@ -75,11 +75,19 @@
             <form class="w-50">
                 <fieldset>
 
+                <?php 
+                         $q = $_GET['q'];
+                         include 'director_complaints_php_functions.php';
+                         displayComplaintDetails($q); 
+                ?>
+<!--
                 <div class="form-group row">
                     <label for="patient" class="col-sm-3 col-form-label" style="color: var(--primary);"><b>Składający</b></label>
+                    
                     <div class="col-sm-9">
-                         <input type="text" readonly="" class="form-control" style = "background-color: #ffffff;" id="patient" value="brak">
+                         <input type="text" readonly="" class="form-control" style = "background-color: #ffffff;" id="patient" value="'.$q.'">
                     </div>
+                    
                 </div>
                 <div class="form-group row">
                     <label for="date_sub" class="col-sm-3 col-form-label" style="color: var(--primary);"><b>Data złożenia</b></label>
@@ -111,18 +119,19 @@
                         <textarea class="form-control" readonly="" style = "background-color: #ffffff;" id="reason" rows="4"></textarea>                    
                     </div>
                 </div>
+                -->
 
                 </fieldset>
             </form>
 
             <div class="w-50" style="display: flex; flex-direction: row; margin-top: 10px; align-items: center; justify-content: space-between; ">
 
-            <a type="button" onclick="acceptComplaint()" style="width:150px; text-transform: capitalize;" class="btn btn-primary"  href="#" role="button">Odrzuć</a>
-            <a type="button" onclick="declineComplaint()" style="width:150px; text-transform: capitalize;" class="btn btn-primary" href="#" role="button">Akceptuj</a>
+            <a type="button" onclick="acceptComplaint()" style="width:45%; text-transform: capitalize;" class="btn btn-primary"  href="#" role="button">Odrzuć</a>
+            <a type="button" onclick="declineComplaint()" style="width:45%; text-transform: capitalize;" class="btn btn-primary" href="#" role="button">Akceptuj</a>
 
             </div>
             <div class="w-50" style="display: flex; flex-direction: row; margin-top: 10px; align-items: center; justify-content: space-between; ">
-            <a type="button" onclick="declineComplaint()" style="width:100%; text-transform: none ; margin-bottom:50px;" class="btn btn-primary" href="#" role="button">Powrót do listy</a>
+            <a type="button" style="width:100%; text-transform: none ; margin-bottom:50px;" class="btn btn-primary" href="director_complaints.php" role="button">Powrót do listy</a>
             </div>
         </div>
     </div>
