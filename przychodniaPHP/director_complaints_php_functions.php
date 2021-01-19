@@ -71,8 +71,14 @@ function displayComplaintsList(){
 
 function displayComplaintDetails($id){
 
-    $polaczenie = mysqli_connect("localhost","root","","przychodniaDB");
 
+    $polaczenie = mysqli_connect("localhost","root","","przychodniaDB");
+  if($polaczenie->connect_errno!=0)
+  {
+      echo "Error: ".$polaczenie->connect_errno;
+  }
+  else
+  {
 
     $sql = "SELECT 
                 r.`ID`,
@@ -137,13 +143,52 @@ function displayComplaintDetails($id){
             <textarea class="form-control" readonly="" style = "background-color: #ffffff;" id="reason" rows="4">'.$row["Opis"].'</textarea>                    
         </div>
     </div>
-    <div class="form-group row">
+    ';
+    /* do echo
+     <div class="form-group row">
         <label for="justification"  class="col-sm-3 col-form-label" style="color: var(--primary);"><b>Uzasadnienie</b></label>
         <div class="col-sm-9">
             <textarea class="form-control" style = "background-color: #ffffff;" id="justification" rows="2"></textarea>                    
         </div>
     </div>
-    ';
+    */
+}
+}
+
+function updateRecord($q,$d){
+
+    $polaczenie = @new mysqli("localhost","root","","przychodniaDB");
+                         
+    if($polaczenie->connect_errno!=0)
+    {
+        echo "Error: ".$polaczenie->connect_errno;
+    }
+    else
+    {
+        if(isset($_GET['d'])){
+            $_SESSION['d'] = $_GET['d'];
+        }
+        if(isset($_GET['q'])){
+            $_SESSION['q'] = $_GET['q'];
+        }  
+        
+        $idDecyzji = $_SESSION['d']."";
+        $idReklamacji = $_SESSION['q']."";
+        
+        if($rezultat = @$polaczenie->query("SELECT ID from reklamacja where ID=$idReklamacji"))
+        {
+            $ile_wynikow = $rezultat->num_rows;
+            if($ile_wynikow>0)
+            {
+                if($idDecyzji=="0"){
+                $aktualizacja = @$polaczenie->query("UPDATE reklamacja SET reklamacja.Decyzja = 'uznana', reklamacja.`DataRozpatrzenia`= CURRENT_TIMESTAMP() WHERE reklamacja.ID=".$idReklamacji);
+                }else if($idDecyzji=="1"){
+                $aktualizacja = @$polaczenie->query("UPDATE reklamacja SET reklamacja.Decyzja = 'nieuznana', reklamacja.`DataRozpatrzenia`= CURRENT_TIMESTAMP() WHERE reklamacja.ID=".$idReklamacji);
+                }
+            }
+        }
+    }
+    $polaczenie->close();
 }
 
 ?>

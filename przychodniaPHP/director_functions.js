@@ -8,22 +8,18 @@ function cancelVisit(id){
     var date_hour = 0;
     var date_min = 0;
 
-  //  var date = new Date.UTC();
-  //  date.setHours( date.getHours() + 2 );
-
     var date = new Date(); 
     var now_utc =  Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),
      date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
     
      var date = new Date(now_utc);
 
-   // window.alert(date.toString());
 
  //  var div_els = document.getElementById("visit_list").querySelectorAll(".date_time");
   
   // var div_els = document.querySelectorAll(".visit_list .list_element .date_time");
 
-  //      v = div_els[0].innerHTML.substring(3,18);
+  //    v = div_els[0].innerHTML.substring(3,18);
         var id_splitter = id.split("-");
         var id_num = id_splitter[1];
         var v = document.getElementById("date_time1-"+id_num).textContent;
@@ -37,11 +33,6 @@ function cancelVisit(id){
         var icon_id = "icon-"+id_num;
  
         var date1 = new Date(date_year,date_month,date_day,date_hour,date_min,0,0);
-    //   window.alert("date-date: "+v+"\ndate1: "+date1+"\ndate2: "+date);
-      // var txt = document.getElementById('date_time').innerHTML.substring(3,18);
-    //   window.alert(icon_id);
-
-     // window.alert(date_year+","+date_month+","+date_day+","+date_hour+","+date_minute);
 
     if(date1.getTime() < date.getTime()){
             x = document.getElementById("snackbar_unable");
@@ -50,7 +41,6 @@ function cancelVisit(id){
     }
     else{
         if(window.confirm("Czy na pewno chcesz odwołać wizytę?")){
-        // window.alert("Wizyta została odwołana");
            x = document.getElementById("snackbar");
             x.className = "show";
             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
@@ -60,7 +50,6 @@ function cancelVisit(id){
             updateDB(id);
         }
         else {
-        //  window.alert("Wizyta nie została odwołana");
             x = document.getElementById("snackbar_cancelled");
             x.className = "show";
             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
@@ -69,9 +58,8 @@ function cancelVisit(id){
  
 }
 
-function updateDB(id){    // the #id you supplied to the button, id= 'button1'
+function updateDB(id){    
 
-   // var value = $(id).val();  // Value of the button, value= 'button1value'
    var id_splitter = id.split("-");
    var id_num = id_splitter[1];
    var date_visit = document.getElementById("date_time1-"+id_num).textContent;
@@ -98,7 +86,6 @@ function updateDB(id){    // the #id you supplied to the button, id= 'button1'
             dataType: 'json',
           data: {date_time:date_visit,doctor_spec:spec,doctor_name:d_name,doctor_last_name:d_surname},  // the name you're assigning, think how a $_GET works in URL,  .php?name=value...
           success: function() {
-            //var html = res;// no need to waste a variable, just use it directly
             console.log( "Yaaay" );        },
         error: function() {
             console.log( "Ajax Not Working" );
@@ -115,6 +102,35 @@ function complaintDetails(id){
     var id_splitter = id.split("-");
     var id_num = id_splitter[1];
     var db_id = document.getElementById("complaint-"+id_num).textContent;
-   // window.alert(db_id);
     window.location.replace("director_complaint_form.php?q="+db_id);
+}
+
+function acceptComplaint(db_id){
+  var x;
+  if(window.confirm("Czy na pewno chcesz uznać reklamację?")){
+        x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+        setTimeout(function(){window.location.replace("director_complaint_form.php?q="+db_id+"&d=0");}, 5000);
+    }
+    else {
+        x = document.getElementById("snackbar_cancelled");
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+    }
+}
+
+function declineComplaint(db_id){
+  var x;
+    if(window.confirm("Czy na pewno chcesz odrzucić reklamację?")){
+      x = document.getElementById("snackbar_unable");
+      x.className = "show";
+      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+      setTimeout(function(){window.location.replace("director_complaint_form.php?q="+db_id+"&d=1");},3000);
+  }
+  else {
+      x = document.getElementById("snackbar4");
+      x.className = "show";
+      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+  }
 }

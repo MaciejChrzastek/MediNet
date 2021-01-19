@@ -18,7 +18,7 @@
     <meta name="description" content="Aplikacja webowa MediNet pomagająca w obsłudze wizyt w przychodni.">
     <link href="css/bootstrap1.css" rel="stylesheet">
 
-    <script src="director_functions.js"></script>
+    <script src="patient_functions.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <!--konieczne do działania elementow typu 'dropdown' - musi wystepowac przed ogolnym JS Bootstrapa-->
@@ -31,10 +31,8 @@
 
 <body>
 
-<div id="snackbar" >Reklamacja została uznana</div>
-<div id="snackbar_cancelled" >Reklamacja nie została uznana</div>
-<div id="snackbar_unable" >Reklamacja została odrzucona</div>
-<div id="snackbar4" >Reklamacja nie została odrzucona</div>
+<div id="snackbar" class = "snackbar">Reklamacja została uznana</div>
+<div id="snackbar_cancelled" class = "snackbar">Reklamacja nie została uznana</div>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-light w-100" >
         <ul class="navbar-nav ml-auto w-100 align-left">
@@ -79,53 +77,46 @@
 
                 <?php 
                          $q = $_GET['q'];
+                         $d = $_GET['d'];
                          include 'director_complaints_php_functions.php';
-                         displayComplaintDetails($q); 
-                         if ((array_key_exists('d',$_GET)) || (!empty($_GET['d']))){
-                            $d = $_GET['d'];
-                            updateRecord($q,$d);
-                         }
+                         displayComplaintDetails($q);
+                         updateRecord($q,$d);
+/*
+                        $polaczenie = @new mysqli("localhost","root","","przychodniaDB");
+                         
+                        if($polaczenie->connect_errno!=0)
+                        {
+                            echo "Error: ".$polaczenie->connect_errno;
+                        }
+                        else
+                        {
+                            if(isset($_GET['d'])){
+                                $_SESSION['d'] = $_GET['d'];
+                            }
+                            if(isset($_GET['q'])){
+                                $_SESSION['q'] = $_GET['q'];
+                            }  
+                            
+                            $idDecyzji = $_SESSION['d']."";
+                            $idReklamacji = $_SESSION['q']."";
+                            
+                            if($rezultat = @$polaczenie->query("SELECT ID from reklamacja where ID=$idReklamacji"))
+                            {
+                                $ile_wynikow = $rezultat->num_rows;
+                                if($ile_wynikow>0)
+                                {
+                                    if($idDecyzji=="0"){
+                                    $aktualizacja = @$polaczenie->query("UPDATE reklamacja SET reklamacja.Decyzja = 'uznana' WHERE reklamacja.ID=".$idReklamacji);
+                                    }else if($idDecyzji=="1"){
+                                    $aktualizacja = @$polaczenie->query("UPDATE reklamacja SET reklamacja.Decyzja = 'nieuznana' WHERE reklamacja.ID=".$idReklamacji);
+                                    }
+                                }
+                            }
+                        }
+                        $polaczenie->close();
+
+      */                 
                 ?>
-<!--
-                <div class="form-group row">
-                    <label for="patient" class="col-sm-3 col-form-label" style="color: var(--primary);"><b>Składający</b></label>
-                    
-                    <div class="col-sm-9">
-                         <input type="text" readonly="" class="form-control" style = "background-color: #ffffff;" id="patient" value="'.$q.'">
-                    </div>
-                    
-                </div>
-                <div class="form-group row">
-                    <label for="date_sub" class="col-sm-3 col-form-label" style="color: var(--primary);"><b>Data złożenia</b></label>
-                    <div class="col-sm-9">
-                         <input type="text" readonly="" class="form-control" style = "background-color: #ffffff;" id="date_sub" value="brak">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="date_visit" class="col-sm-3 col-form-label" style="color: var(--primary);"><b>Data wizyty</b></label>
-                    <div class="col-sm-9">
-                         <input type="text" readonly="" class="form-control" style = "background-color: #ffffff;" id="date_visit" value="brak">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="sum" class="col-sm-3 col-form-label" style="color: var(--primary);"><b>Kwota</b></label>
-                    <div class="col-sm-9">
-                         <input type="text" readonly="" class="form-control" style = "background-color: #ffffff;" id="sum" value="brak">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="doctor" class="col-sm-3 col-form-label" style="color: var(--primary);"><b>Lekarz</b></label>
-                    <div class="col-sm-9">
-                         <input type="text" readonly="" class="form-control" style = "background-color: #ffffff;" id="doctor" value="brak">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="reason"  class="col-sm-3 col-form-label" style="color: var(--primary);"><b>Powód</b></label>
-                    <div class="col-sm-9">
-                        <textarea class="form-control" readonly="" style = "background-color: #ffffff;" id="reason" rows="4"></textarea>                    
-                    </div>
-                </div>
-                -->
 
                 </fieldset>
             </form>
@@ -134,8 +125,8 @@
 
             <?php
             echo '
-            <a type="button" onclick="declineComplaint('.$q.')" style="width:45%; text-transform: capitalize;" class="btn btn-primary"  href="#" role="button">Odrzuć</a>
-            <a type="button" onclick="acceptComplaint('.$q.')" style="width:45%; text-transform: capitalize;" class="btn btn-primary" href="#" role="button">Akceptuj</a>
+            <a type="button" onclick="acceptComplaint()" style="width:45%; text-transform: capitalize;" class="btn btn-primary"  href="director_complaint_form.php?q='.$q.'&d=1" role="button">Odrzuć</a>
+            <a type="button" onclick="declineComplaint()" style="width:45%; text-transform: capitalize;" class="btn btn-primary" href="director_complaint_form.php?q='.$q.'&d=0" role="button">Akceptuj</a>
             '
             ?>
 

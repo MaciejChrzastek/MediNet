@@ -34,6 +34,8 @@
     <div id="snackbar" class = "snackbar">Wizyta została odwołana</div>
     <div id="snackbar_cancelled" class = "snackbar">Wizyta nie została odwołana</div>
     <div id="snackbar_unable">Brak możliwości odwołania odbytej wizyty</div>
+ <!--   <div id="snackbar_complain">Reklamacja została złożona</div> -->
+
 
     <!-- pierwszy NavBar - ikony + dropdown -->
 
@@ -128,7 +130,20 @@
             <?php
 
                 include 'patient_visits_php_functions.php';
-                displayListItems(); 
+               if ((((array_key_exists('q',$_GET)) || (!empty($_GET['q']))))&&((((($_GET['d'])=="1"))))){
+                    $q = $_GET['q'];
+                    updateRecord($q);
+                 }
+              
+              displayListItems(); 
+                 if (array_key_exists('powrot',$_GET) || !empty($_GET['powrot'])){
+                    echo" <script type='text/JavaScript'>
+                    x = document.getElementById(\"snackbar_cancelled\");
+                    x.innerHTML=\"Reklamacja została złożona\";
+                    x.className = \"show\";
+                    setTimeout(function(){ x.className = x.className.replace(\"show\", \"\"); }, 2000);
+                                        </script> ";}
+
 
             /*
 	            $polaczenie = mysqli_connect("localhost","root","","przychodniaDB");
