@@ -48,7 +48,6 @@ if($result -> num_rows > 0){
 
 
         echo "<div id=\"div--".$number."\" class=\"w-100 align-middle jumbotron-extra list_element\" style=\"padding-left: 25px; padding-right: 25px;height: 50px; display: flex; justify-content: space-between; flex-direction: row;\">
-        <p id=\"d-".$number."\" class=\"date_time\"><b>". $d ."</b></p>
         <p id=\"wizyta-".$number."\" style=\"display:none;\"><b>". $row["ID"] ."</b></p>
         <p>
         <img id=\"icon-".$number."\" style=\"width: 20px; height:".$height.";\" src=\"". $icon ."\">
@@ -56,7 +55,7 @@ if($result -> num_rows > 0){
         </p>
         <p id=\"doctor-".$number."\" class=\"w-50\" style=\"text-align: center;\">". $row["Lekarz"] ."</p>
         <p id=\"options-".$number."\"  class=\"w-25 fa-align-right\" style=\"text-align: right;\">
-        <a id=\"cancel-".$number."\" onclick=\"cancelVisit(this.id)\" style=\"font-weight: bolder;\" href=\"patient_visits.php?q=". $row["ID"] ."&d=".$d."\">Odwołaj</a>
+        <a role=\"button\" id=\"cancel-".$number."\" onclick=\"cancelVisit(this.id)\" style=\"color:var(--primary); font-weight: bolder;\" >Odwołaj</a>
         <a id=\"complain-".$number."\" onclick=\"submitComplaint()\" style=\"font-weight: bolder; margin-left: 30px;\" href=\"patient_complaint_form.php?q=".$row["ID"]."\">Zareklamuj</a>
 
         </p>

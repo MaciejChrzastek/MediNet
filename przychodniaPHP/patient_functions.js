@@ -50,9 +50,6 @@ function cancelVisit(id){
             x = document.getElementById("snackbar_unable");
             x.className = "show";
             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
-          //  window.location.replace("patient_visits.php?q="+w_id+"&d=0");
-          return 0;
-
     }
     else{
         if(window.confirm("Czy na pewno chcesz odwołać wizytę?")){
@@ -64,26 +61,22 @@ function cancelVisit(id){
             var img = document.getElementById(icon_id);
             img.style.height = "25px";
             img.src = "css/cancel.png";
-            x.innerHTML = "Wizyta nie została odwołana";
-           // window.alert("patient_visits.php?q="+w_id+"&d=1");
-           //window.location.replace("patient_visits.php?q="+w_id+"&d=1");
-           return 1;
-
+            window.location.replace("patient_visits.php?q="+w_id+"&d=1");
         }
         else {
         //  window.alert("Wizyta nie została odwołana");
             x = document.getElementById("snackbar_cancelled");
-           // d = document.getElementById("d-"+id_num);
             x.innerHTML="Wizyta nie została odwołana";
             x.className = "show";
             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
-           // window.alert("patient_visits.php?q="+w_id+"&d=0");
-          //  window.location.href="patient_visits.php?q="+w_id+"&d=0";
-            return 0;
+            var loc="patient_visits.php";
+            var go_to= "patient_visits.php?q="+w_id+"&d=0";
+            window.location.href=go_to;
 
         }
-    }
- 
+    
+      }
+    
 }
 
 
@@ -130,5 +123,4 @@ function cancelVisit1(x){
 }
 
 function submitComplaint(){
-  window.alert("Reklamacja zostala złożona");
 }
