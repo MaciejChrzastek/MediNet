@@ -93,31 +93,60 @@
             <hr class="my-3" >
         </p>
 
+        <?php
+
+                if ( isset($_POST['id']) && isset($_POST['reason'])&& isset($_POST['amount'])){
+                    $id = $_POST['id'];
+                    $reason = $_POST['reason'];
+                    $amount = $_POST['amount'];
+                   // echo $id.', '.$reason.', '.$amount;
+                    include 'patient_submit_complaint.php';
+                    addComplaint($id,$reason,$amount);
+                 if(!(array_key_exists('q',$_GET)) || (empty($_GET['q']))) {
+                    header("Location: patient_visits.php?powrot=0");
+                    echo '<script type="text/javascript">
+                    window.alert("ufff");
+                    </script>';
+                    exit();
+                 }  
+                }
+        ?>
+
         <div style="margin-top: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
 
-            <form class="w-50">
+            <form class="w-50" action="patient_complaint_form.php" method="post" target="_self">
                 <fieldset>
+                  <textarea type="text" style="display:none;" class="form-control" id="id" name="id">
+                    <?php 
+                        if((array_key_exists('q',$_GET)) || (!empty($_GET['q']))){
+                            echo $_GET['q'];
+                            }
+                            else{
+                                echo $id;
+                                }?>
+                   </textarea>
                   <div class="form-group ">
                     <label for="reason"  style="color: var(--primary);"><b>Powód reklamacji</b></label>
                     <div >
-                        <textarea class="form-control" id="reason" rows="4" placeholder="Powód reklamacji..."></textarea>                    
+                        <textarea class="form-control" id="reason" name="reason" rows="4" placeholder="Powód reklamacji..."></textarea>                    
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="amount" style="color: var(--primary);"><b>Kwota reklamacji</b></label>
                     <div >
-                      <input type="text"  class="form-control" id="amount" placeholder="50,00">
+                      <input type="text"  class="form-control" id="amount" name="amount" placeholder="50,00">
                     </div>
                   </div>
                 </fieldset>
-            </form>
 
-            <div class="w-50" style="display: flex; flex-direction: row; margin-top: 10px; align-items: center; justify-content: space-between; ">
+            <div class="w-100" style="display: flex; flex-direction: row; margin-top: 10px; align-items: center; justify-content: space-between; ">
 
             <a type="button" style="width:150px; text-transform: capitalize;" class="btn btn-primary"  href="patient_visits.php" role="button">Anuluj</a>
-            <a type="button" onclick="submitComplaint()" style="width:150px; text-transform: capitalize;" class="btn btn-primary" href="patient_visits.php" role="button">Reklamuj</a>
+            <input type="submit" onclick="submitComplaint();" style="width:150px; text-transform: capitalize;" class="btn btn-primary"  role="button" value="Reklamuj">
 
             </div>
+            </form>
+
 
         </div>
     </div>
