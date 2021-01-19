@@ -108,15 +108,17 @@ function complaintDetails(id){
 function acceptComplaint(db_id){
   var x;
   if(window.confirm("Czy na pewno chcesz uznać reklamację?")){
-        x = document.getElementById("snackbar");
+        x = document.getElementById("snackbar_cancelled");
+        x.innerHTML="Reklamacja została uznana";
         x.className = "show";
-        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
-        setTimeout(function(){window.location.replace("director_complaint_form.php?q="+db_id+"&d=0");}, 5000);
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
+        window.location.replace("director_complaint_form.php?q="+db_id+"&d=0");
     }
     else {
         x = document.getElementById("snackbar_cancelled");
+        x.innerHTML="Reklamacja nie została uznana";
         x.className = "show";
-        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
     }
 }
 
@@ -124,13 +126,15 @@ function declineComplaint(db_id){
   var x;
     if(window.confirm("Czy na pewno chcesz odrzucić reklamację?")){
       x = document.getElementById("snackbar_unable");
+      x.innerHTML="Reklamacja została odrzucona";
       x.className = "show";
-      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
-      setTimeout(function(){window.location.replace("director_complaint_form.php?q="+db_id+"&d=1");},3000);
+      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+      window.location.replace("director_complaint_form.php?q="+db_id+"&d=1");
   }
   else {
-      x = document.getElementById("snackbar4");
+      x = document.getElementById("snackbar_unable");
+      x.innerHTML="Reklamacja nie została odrzucona";
       x.className = "show";
-      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
   }
 }

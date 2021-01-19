@@ -134,8 +134,8 @@
 
             <?php
             echo '
-            <a type="button" onclick="declineComplaint('.$q.')" style="width:45%; text-transform: capitalize;" class="btn btn-primary"  href="#" role="button">Odrzuć</a>
-            <a type="button" onclick="acceptComplaint('.$q.')" style="width:45%; text-transform: capitalize;" class="btn btn-primary" href="#" role="button">Akceptuj</a>
+            <a role="button" type="button" onclick="declineComplaint('.$q.')" style="width:45%; text-transform: capitalize;" class="btn btn-primary"  href="#" role="button">Odrzuć</a>
+            <a role="button" type="button" onclick="acceptComplaint('.$q.')" style="width:45%; text-transform: capitalize;" class="btn btn-primary" href="#" role="button">Akceptuj</a>
             '
             ?>
 
